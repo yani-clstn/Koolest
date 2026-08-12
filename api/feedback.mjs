@@ -1,6 +1,6 @@
 import { feedbackSchema } from "../src/assets/libs/validations/feedback.js";
 import { prisma } from "../src/assets/libs/prisma.js";
-import { ratelimit } from "../src/assets/libs/ratelimit.js";
+import { feedbackRatelimit } from "../src/assets/libs/ratelimit.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -12,14 +12,14 @@ export default async function handler(req, res) {
 
   try {
     // 1. Safe Rate Limiting
-    if (ratelimit) {
+    if (feedbackRatelimit) {
       try {
         const xForwardedFor = req.headers["x-forwarded-for"];
         const clientIp = typeof xForwardedFor === "string"
           ? xForwardedFor.split(",")[0].trim()
           : req.socket?.remoteAddress || "127.0.0.1";
 
-        const { success } = await ratelimit.limit(clientIp);
+        const { success } = await feedbackRatelimit.limit(clientIp);
         if (!success) {
           return res.status(429).json({
             success: false,
