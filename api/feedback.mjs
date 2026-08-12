@@ -1,6 +1,6 @@
-import { feedbackSchema } from "../src/libs/validations/feedback.js";
-import { prisma } from "../src/libs/prisma.js";
-import { ratelimit } from "../src/libs/ratelimit.js";
+import { feedbackSchema } from "../src/assets/libs/validations/feedback.js";
+import { prisma } from "../src/assets/libs/prisma.js";
+import { ratelimit } from "../src/assets/libs/ratelimit.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
