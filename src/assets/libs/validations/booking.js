@@ -18,7 +18,7 @@ export const bookingSchema = z.object({
     .string()
     .trim()
     .min(2, "Full name must be at least 2 characters long")
-    .max(100, "Full name is too long")
+    .max(50, "Full name is too long")
     .regex(
     /^[A-Z][a-zA-Z'-]*(\s[A-Z][a-zA-Z'-]*)+$/,
     "Please capitalize each name properly (e.g. Juan Dela Cruz)"),
