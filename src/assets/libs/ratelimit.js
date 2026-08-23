@@ -1,6 +1,5 @@
 import { feedbackSchema } from "../src/assets/libs/validations/feedback.js";
 import { prisma } from "../src/assets/libs/prisma.js";
-import { feedbackRatelimit } from "../src/assets/libs/ratelimit.js";
 
 // Create Redis instance using Upstash REST environment variables
 const redis = new Redis({
