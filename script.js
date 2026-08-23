@@ -192,16 +192,25 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       try {
-        const response = await fetch("/api/bookings", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+        const response = await fetch('/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
         });
 
-        const data = await response.json();
+        // Safely handle HTML or JSON responses
+        const contentType = response.headers.get("content-type");
+        let data;
+
+        if (contentType && contentType.includes("application/json")) {
+          data = await response.json();
+        } else {
+          const rawText = await response.text();
+          throw new Error(rawText || `Server error status ${response.status}`);
+        }
 
         if (!response.ok || !data.success) {
-          console.error("Booking submission error details:", data.details || data.error);
+          console.error("Booking API error:", data);
           showFieldError(data);
           return;
         }
@@ -209,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showSuccessUI();
       } catch (err) {
         console.error("Booking API request failed:", err);
-        showGenericError(`An error occurred while submitting your booking. Please check your internet connection.`);
+        showGenericError(err.message || "An error occurred while submitting your booking. Please check your connection.");
       }
     });
   }
@@ -302,7 +311,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 7. Feedback Form Submission
- // 7. Feedback Form Submission
   const feedbackForm = document.getElementById("feedbackForm");
   const feedbackFieldInputMap = {
     name: () => document.getElementById("clientName"),
@@ -336,7 +344,6 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify(formData),
         });
 
-        // SAFE PARSING: Handle Non-JSON HTML/Text server errors gracefully
         let data;
         const contentType = response.headers.get("content-type");
 
@@ -439,13 +446,11 @@ document.addEventListener("DOMContentLoaded", () => {
     issueForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      // Clear previous custom validity errors
       Object.values(issueFieldInputMap).forEach((getEl) => {
         const el = getEl();
         if (el) el.setCustomValidity("");
       });
 
-      // Hide red error banner if it exists
       const issueErrorBanner = document.getElementById("issueErrorBanner");
       if (issueErrorBanner) issueErrorBanner.style.display = "none";
 
@@ -463,7 +468,15 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify(formData),
         });
 
-        const data = await response.json();
+        let data;
+        const contentType = response.headers.get("content-type");
+
+        if (contentType && contentType.includes("application/json")) {
+          data = await response.json();
+        } else {
+          const rawText = await response.text();
+          throw new Error(rawText || `Server error status ${response.status}`);
+        }
 
         if (!response.ok || !data.success) {
           console.error("Report issue submission error:", data.details || data.error);
@@ -471,14 +484,13 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        // Show Success UI
         issueForm.style.display = "none";
         const formSuccess = document.getElementById("formSuccess");
         if (formSuccess) formSuccess.style.display = "block";
 
       } catch (err) {
         console.error("Report issue API request failed:", err);
-        showIssueGenericError("An error occurred while submitting your report. Please check your connection.");
+        showIssueGenericError(err.message || "An error occurred while submitting your report.");
       }
     });
   }
@@ -500,7 +512,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     }
-    // Fallback to error message string sent from server/Zod
     showIssueGenericError(data?.error || data?.message || "Failed to submit report. Please check your inputs.");
   }
 
