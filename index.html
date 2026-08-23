@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Koolest | Aircon Cleaning & Services</title>
 
-    <meta http-equiv="Content-Security-Policy" content="
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
     default-src 'self'; 
     script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://vercel.live; 
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; 
@@ -13,22 +15,29 @@
     img-src 'self' data: https:; 
     connect-src 'self' https://cdnjs.cloudflare.com https://*.upstash.io https://*.neon.tech https://accounts.google.com https://vercel.live; 
     frame-src 'self' https://accounts.google.com https://vercel.live;
-">
+"
+    />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="public/assets/koolest_logo.png">
-    
+    <link rel="icon" type="image/png" href="public/assets/koolest_logo.png" />
+
     <!-- Preload critical stylesheet to eliminate FOUC layout glitch -->
-    <link rel="preload" href="public/output.css" as="style">
-    <link rel="stylesheet" href="public/output.css">
+    <link rel="preload" href="public/output.css" as="style" />
+    <link rel="stylesheet" href="public/output.css" />
 
     <!-- Preconnect to Google Fonts for faster font rendering -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Righteous&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Righteous&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
 
     <!-- Typed.js for Typewriter Animation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.1.0/typed.umd.js"></script>
@@ -44,671 +53,1378 @@
         animation: floatUp linear infinite;
       }
       @keyframes floatUp {
-        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-        100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      @keyframes infiniteScroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      .animate-infinite-scroll {
+        display: flex;
+        animation: infiniteScroll 25s linear infinite;
+      }
+
+      .mask-gradient {
+        mask-image: linear-gradient(
+          to right,
+          transparent,
+          black 10%,
+          black 90%,
+          transparent
+        );
+        -webkit-mask-image: linear-gradient(
+          to right,
+          transparent,
+          black 10%,
+          black 90%,
+          transparent
+        );
       }
     </style>
 
     <script src="script.js" defer></script>
-</head>
-<body class="bg-slate-50 font-body text-slate-800 antialiased selection:bg-[#38bdf8] selection:text-[#082b2a]">
-
+  </head>
+  <body
+    class="bg-slate-50 font-body text-slate-800 antialiased selection:bg-[#38bdf8] selection:text-[#082b2a]"
+  >
     <!-- Target container for JavaScript particles -->
-    <div id="breeze-container" class="absolute inset-0 pointer-events-none overflow-hidden z-10"></div>
+    <div
+      id="breeze-container"
+      class="absolute inset-0 pointer-events-none overflow-hidden z-10"
+    ></div>
     <iframe name="hidden_iframe" id="hidden_iframe" class="hidden"></iframe>
 
     <!-- NAVBAR -->
-    <header class="sticky top-0 z-50 bg-[#0d413f]/95 backdrop-blur-md border-b border-white/10 shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between relative">
-            
-            <a href="#" class="flex items-center gap-3 transition-transform hover:scale-105">
-                <img src="public/assets/koolest_logo.png" alt="Koolest Logo" class="h-12 w-auto object-contain">
-                <span class="font-heading text-2xl text-white tracking-wide">Koolest</span>
-            </a>
+    <header
+      class="sticky top-0 z-50 bg-[#0d413f]/95 backdrop-blur-md border-b border-white/10 shadow-md"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between relative"
+      >
+        <a
+          href="#"
+          class="flex items-center gap-3 transition-transform hover:scale-105"
+        >
+          <img
+            src="public/assets/koolest_logo.png"
+            alt="Koolest Logo"
+            class="h-12 w-auto object-contain"
+          />
+          <span class="font-heading text-2xl text-white tracking-wide"
+            >Koolest</span
+          >
+        </a>
 
-            <!-- Mobile Hamburger Button -->
-            <button class="hamburger lg:hidden text-white focus:outline-none p-2 z-50 cursor-pointer" id="hamburger-btn" aria-label="Toggle Navigation">
-                <i class="fa-solid fa-bars text-2xl"></i>
-            </button>
+        <!-- Mobile Hamburger Button -->
+        <button
+          class="hamburger lg:hidden text-white focus:outline-none p-2 z-50 cursor-pointer"
+          id="hamburger-btn"
+          aria-label="Toggle Navigation"
+        >
+          <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
 
-            <!-- Navigation Links -->
-            <nav>
-                <ul id="nav-menu" class="nav-links hidden lg:flex flex-col lg:flex-row absolute lg:relative top-full lg:top-0 left-0 w-full lg:w-auto bg-[#0d413f] lg:bg-transparent items-center text-center gap-1 lg:gap-8 font-semibold text-sm text-slate-200 border-t border-white/10 lg:border-none shadow-2xl lg:shadow-none rounded-b-2xl lg:rounded-none py-4 lg:py-0 transition-all">
-                    <li class="w-full lg:w-auto">
-                        <a href="#services" class="block w-full px-6 py-3 lg:p-0 lg:w-auto rounded-xl hover:bg-white/5 lg:hover:bg-transparent hover:text-[#38bdf8] transition-colors">Services</a>
-                    </li>
-                    <li class="w-full lg:w-auto">
-                        <a href="#testimonials" class="block w-full px-6 py-3 lg:p-0 lg:w-auto rounded-xl hover:bg-white/5 lg:hover:bg-transparent hover:text-[#38bdf8] transition-colors">Reviews</a>
-                    </li>
-                    <li class="w-full lg:w-auto">
-                        <a href="#rate-us" class="block w-full px-6 py-3 lg:p-0 lg:w-auto rounded-xl hover:bg-white/5 lg:hover:bg-transparent hover:text-[#38bdf8] transition-colors">Rate Us</a>
-                    </li>
-                    <li class="w-full lg:w-auto">
-                        <a href="#contact-us" class="block w-full px-6 py-3 lg:p-0 lg:w-auto rounded-xl hover:bg-white/5 lg:hover:bg-transparent hover:text-[#38bdf8] transition-colors">Contact Us</a>
-                    </li>
-                    <li class="w-full lg:w-auto">
-                        <a href="#gallery" class="block w-full px-6 py-3 lg:p-0 lg:w-auto rounded-xl hover:bg-white/5 lg:hover:bg-transparent hover:text-[#38bdf8] transition-colors">Gallery</a>
-                    </li>
-                    <li class="w-full lg:w-auto">
-                        <a href="public/report-issue.html" class="block w-full px-6 py-3 lg:p-0 lg:w-auto rounded-xl text-rose-400 hover:bg-white/5 lg:hover:bg-transparent hover:text-rose-300 font-bold transition-colors">
-                            Report an Issue
-                        </a>
-                    </li>
-                    <li class="w-full lg:w-auto px-6 lg:px-0 pt-2 lg:pt-0">
-                        <a href="#booking" class="block w-full lg:w-auto text-center bg-[#38bdf8] text-[#082b2a] hover:bg-[#0284c7] font-bold px-5 py-3 lg:py-2.5 rounded-xl transition-all shadow-sm hover:shadow-md">
-                            Book Now
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+        <!-- Navigation Links -->
+        <nav>
+          <ul
+            id="nav-menu"
+            class="nav-links hidden lg:flex flex-col lg:flex-row absolute lg:relative top-full lg:top-0 left-0 w-full lg:w-auto bg-[#0d413f] lg:bg-transparent items-center text-center gap-1 lg:gap-8 font-semibold text-sm text-slate-200 border-t border-white/10 lg:border-none shadow-2xl lg:shadow-none rounded-b-2xl lg:rounded-none py-4 lg:py-0 transition-all"
+          >
+            <li class="w-full lg:w-auto">
+              <a
+                href="#services"
+                class="block w-full px-6 py-3 lg:p-0 lg:w-auto rounded-xl hover:bg-white/5 lg:hover:bg-transparent hover:text-[#38bdf8] transition-colors"
+                >Services</a
+              >
+            </li>
+            <li class="w-full lg:w-auto">
+              <a
+                href="#testimonials"
+                class="block w-full px-6 py-3 lg:p-0 lg:w-auto rounded-xl hover:bg-white/5 lg:hover:bg-transparent hover:text-[#38bdf8] transition-colors"
+                >Reviews</a
+              >
+            </li>
+            <li class="w-full lg:w-auto">
+              <a
+                href="#rate-us"
+                class="block w-full px-6 py-3 lg:p-0 lg:w-auto rounded-xl hover:bg-white/5 lg:hover:bg-transparent hover:text-[#38bdf8] transition-colors"
+                >Rate Us</a
+              >
+            </li>
+            <li class="w-full lg:w-auto">
+              <a
+                href="#contact-us"
+                class="block w-full px-6 py-3 lg:p-0 lg:w-auto rounded-xl hover:bg-white/5 lg:hover:bg-transparent hover:text-[#38bdf8] transition-colors"
+                >Contact Us</a
+              >
+            </li>
+            <li class="w-full lg:w-auto">
+              <a
+                href="#gallery"
+                class="block w-full px-6 py-3 lg:p-0 lg:w-auto rounded-xl hover:bg-white/5 lg:hover:bg-transparent hover:text-[#38bdf8] transition-colors"
+                >Gallery</a
+              >
+            </li>
+            <li class="w-full lg:w-auto">
+              <a
+                href="public/report-issue.html"
+                class="block w-full px-6 py-3 lg:p-0 lg:w-auto rounded-xl text-rose-400 hover:bg-white/5 lg:hover:bg-transparent hover:text-rose-300 font-bold transition-colors"
+              >
+                Report an Issue
+              </a>
+            </li>
+            <li class="w-full lg:w-auto px-6 lg:px-0 pt-2 lg:pt-0">
+              <a
+                href="#booking"
+                class="block w-full lg:w-auto text-center bg-[#38bdf8] text-[#082b2a] hover:bg-[#0284c7] font-bold px-5 py-3 lg:py-2.5 rounded-xl transition-all shadow-sm hover:shadow-md"
+              >
+                Book Now
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <!-- HERO SECTION -->
-    <section class="relative bg-gradient-to-b from-[#0d413f] to-[#135350] text-white py-20 lg:py-28 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-20">
-            
-            <div class="lg:col-span-7 space-y-6 text-center lg:text-left animate-fade-in">
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight min-h-[2.4em] sm:min-h-[2em]">
-                    Expert Care For Your <br class="hidden sm:inline">
-                    <span id="typed-text" class="text-[#38bdf8] font-heading"></span>
-                </h1>
-                <p class="text-slate-200 text-lg sm:text-xl max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                    Reliable, fast, and high-quality air conditioning and washing machine services tailored for your home and business.
-                </p>
-                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                    <a href="#booking" class="w-full sm:w-auto inline-flex items-center justify-center bg-[#38bdf8] text-[#082b2a] hover:bg-[#0284c7] font-bold text-lg px-8 py-4 rounded-xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]">
-                        Book Now
-                    </a>
-                </div>
-                <div class="pt-6 flex flex-wrap justify-center lg:justify-start gap-3">
-                    <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/15 px-4 py-2 rounded-full text-xs font-semibold tracking-wide text-[#e0f2fe] transition-transform hover:scale-105">
-                        <i class="fa-solid fa-check text-[#38bdf8]"></i> Fast Response
-                    </span>
-                    <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/15 px-4 py-2 rounded-full text-xs font-semibold tracking-wide text-[#e0f2fe] transition-transform hover:scale-105">
-                        <i class="fa-solid fa-check text-[#38bdf8]"></i> 100% Mess-Free Guarantee
-                    </span>
-                </div>
-            </div>
-
-            <!-- Hero Feature Card -->
-            <div class="lg:col-span-5 bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm text-center lg:text-left space-y-4 shadow-2xl animate-float">
-                <div class="w-12 h-12 bg-[#38bdf8]/20 text-[#38bdf8] rounded-2xl flex items-center justify-center mx-auto lg:mx-0 text-xl font-bold">
-                    <i class="fa-solid fa-bolt"></i>
-                </div>
-                <h3 class="text-2xl font-bold text-white">Save on Electricity Bills</h3>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Clogged cooling coils force your compressor to run double-time. Routine maintenance directly restores cooling performance and lowers power consumption.
-                </p>
-                <div class="pt-2">
-                    <a href="#booking" class="text-[#38bdf8] hover:underline font-bold text-sm inline-flex items-center gap-2 group">
-                        Schedule Maintenance <i class="fa-solid fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
-                    </a>
-                </div>
-            </div>
-
+    <section
+      class="relative bg-gradient-to-b from-[#0d413f] to-[#135350] text-white py-20 lg:py-28 overflow-hidden"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-20"
+      >
+        <div
+          class="lg:col-span-7 space-y-6 text-center lg:text-left animate-fade-in"
+        >
+          <h1
+            class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight min-h-[2.4em] sm:min-h-[2em]"
+          >
+            Expert Care For Your <br class="hidden sm:inline" />
+            <span id="typed-text" class="text-[#38bdf8] font-heading"></span>
+          </h1>
+          <p
+            class="text-slate-200 text-lg sm:text-xl max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed"
+          >
+            Reliable, fast, and high-quality air conditioning and washing
+            machine services tailored for your home and business.
+          </p>
+          <div
+            class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
+          >
+            <a
+              href="#booking"
+              class="w-full sm:w-auto inline-flex items-center justify-center bg-[#38bdf8] text-[#082b2a] hover:bg-[#0284c7] font-bold text-lg px-8 py-4 rounded-xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Book Now
+            </a>
+          </div>
+          <div
+            class="pt-6 flex flex-wrap justify-center lg:justify-start gap-3"
+          >
+            <span
+              class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/15 px-4 py-2 rounded-full text-xs font-semibold tracking-wide text-[#e0f2fe] transition-transform hover:scale-105"
+            >
+              <i class="fa-solid fa-check text-[#38bdf8]"></i> Fast Response
+            </span>
+            <span
+              class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/15 px-4 py-2 rounded-full text-xs font-semibold tracking-wide text-[#e0f2fe] transition-transform hover:scale-105"
+            >
+              <i class="fa-solid fa-check text-[#38bdf8]"></i> 100% Mess-Free
+              Guarantee
+            </span>
+          </div>
         </div>
+
+        <!-- Hero Feature Card -->
+        <div
+          class="lg:col-span-5 bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm text-center lg:text-left space-y-4 shadow-2xl animate-float"
+        >
+          <div
+            class="w-12 h-12 bg-[#38bdf8]/20 text-[#38bdf8] rounded-2xl flex items-center justify-center mx-auto lg:mx-0 text-xl font-bold"
+          >
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white">
+            Save on Electricity Bills
+          </h3>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Clogged cooling coils force your compressor to run double-time.
+            Routine maintenance directly restores cooling performance and lowers
+            power consumption.
+          </p>
+          <div class="pt-2">
+            <a
+              href="#booking"
+              class="text-[#38bdf8] hover:underline font-bold text-sm inline-flex items-center gap-2 group"
+            >
+              Schedule Maintenance
+              <i
+                class="fa-solid fa-arrow-right text-xs transition-transform group-hover:translate-x-1"
+              ></i>
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- SERVICES SECTION -->
     <section id="services" class="py-20 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            
-            <div class="text-center max-w-3xl mx-auto space-y-3">
-                <h2 class="font-heading text-3xl sm:text-4xl text-[#0d413f]">What We Offer</h2>
-                <p class="text-slate-600 text-base sm:text-lg">
-                    Professional care, transparent pricing, and zero shortcuts for your cooling and home appliance systems.
-                </p>
-            </div>
-
-            <!-- Efficiency Banner -->
-            <div class="bg-[#0d413f] text-white rounded-2xl p-8 sm:p-10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 border border-[#145c58] transition-all hover:shadow-2xl">
-                <div class="space-y-2 text-center md:text-left">
-                    <h3 class="font-heading text-2xl sm:text-3xl text-[#38bdf8]">Is your aircon running a fever?</h3>
-                    <p class="text-slate-200 text-sm sm:text-base max-w-2xl">
-                        Clogged cooling coils force your compressor to run double-time. Routine maintenance directly drops electricity usage.
-                    </p>
-                </div>
-                <a href="#booking" class="bg-[#38bdf8] text-[#082b2a] hover:bg-[#0284c7] font-bold px-6 py-3.5 rounded-xl whitespace-nowrap transition-all shadow-md shrink-0 hover:scale-105">
-                    Save on Bills
-                </a>
-            </div>
-
-            <!-- Services Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col">
-                    <img src="../src/assets/cleaning1.jpg" alt="Installation" class="w-full h-48 object-cover bg-slate-100">
-                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
-                        <div class="space-y-2">
-                            <span class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md">Aircon</span>
-                            <h3 class="font-heading text-xl text-[#0d413f]">Installation</h3>
-                            <p class="text-slate-600 text-sm leading-relaxed">Professional installation of window, split-type, or package air conditioning systems according to factory standards.</p>
-                        </div>
-                        <a href="#booking" class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors">Book Now</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col">
-                    <img src="../public/assets/regular-cleaning.png" alt="Regular Cleaning" class="w-full h-48 object-cover bg-slate-100">
-                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
-                        <div class="space-y-2">
-                            <span class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md">Aircon</span>
-                            <h3 class="font-heading text-xl text-[#0d413f]">Regular Cleaning</h3>
-                            <p class="text-slate-600 text-sm leading-relaxed">Routine filter washing, coil inspection, and general cleaning to maintain fresh air flow and energy efficiency.</p>
-                        </div>
-                        <a href="#booking" class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors">Book Now</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col">
-                    <img src="../public/assets/full-down-cleaning.png" alt="Full Down Cleaning" class="w-full h-48 object-cover bg-slate-100">
-                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
-                        <div class="space-y-2">
-                            <span class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md">Aircon</span>
-                            <h3 class="font-heading text-xl text-[#0d413f]">Full Down Cleaning</h3>
-                            <p class="text-slate-600 text-sm leading-relaxed">Complete breakdown and chemical wash of internal components for deeply clogged or heavily soiled units.</p>
-                        </div>
-                        <a href="#booking" class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors">Book Now</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col">
-                    <img src="../public/assets/dismantling.png" alt="Dismantling" class="w-full h-48 object-cover bg-slate-100">
-                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
-                        <div class="space-y-2">
-                            <span class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md">Aircon</span>
-                            <h3 class="font-heading text-xl text-[#0d413f]">Dismantling</h3>
-                            <p class="text-slate-600 text-sm leading-relaxed">Safe uninstallation and removal of old or misplaced aircon units without damaging surrounding structures.</p>
-                        </div>
-                        <a href="#booking" class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors">Book Now</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col">
-                    <img src="../public/assets/relocation.png" alt="Relocation" class="w-full h-48 object-cover bg-slate-100">
-                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
-                        <div class="space-y-2">
-                            <span class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md">Aircon</span>
-                            <h3 class="font-heading text-xl text-[#0d413f]">Relocation</h3>
-                            <p class="text-slate-600 text-sm leading-relaxed">Complete unmounting, transfer, and setup of existing units to new locations or rooms seamlessly.</p>
-                        </div>
-                        <a href="#booking" class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors">Book Now</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col">
-                    <img src="../public/assets/troubleshooting.png" alt="Troubleshooting" class="w-full h-48 object-cover bg-slate-100">
-                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
-                        <div class="space-y-2">
-                            <span class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md">Aircon</span>
-                            <h3 class="font-heading text-xl text-[#0d413f]">Troubleshooting</h3>
-                            <p class="text-slate-600 text-sm leading-relaxed">Expert diagnostic checks for unusual noise, water leaks, cooling failures, or electrical irregularities.</p>
-                        </div>
-                        <a href="#booking" class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors">Book Now</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col">
-                    <img src="../public/assets/repair.png" alt="Repair" class="w-full h-48 object-cover bg-slate-100">
-                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
-                        <div class="space-y-2">
-                            <span class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md">Aircon</span>
-                            <h3 class="font-heading text-xl text-[#0d413f]">Repair</h3>
-                            <p class="text-slate-600 text-sm leading-relaxed">Targeted component replacement and restoration for failed motors, capacitors, circuit boards, or fans.</p>
-                        </div>
-                        <a href="#booking" class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors">Book Now</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col">
-                    <img src="../public/assets/refrigerant-charging.png" alt="Refrigerant Charging" class="w-full h-48 object-cover bg-slate-100">
-                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
-                        <div class="space-y-2">
-                            <span class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md">Aircon</span>
-                            <h3 class="font-heading text-xl text-[#0d413f]">Refrigerant Charging</h3>
-                            <p class="text-slate-600 text-sm leading-relaxed">Freon leak checking, pressure testing, and precision gas refilling to restore optimal cooling power.</p>
-                        </div>
-                        <a href="#booking" class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors">Book Now</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col">
-                    <img src="../public/assets/repiping.png" alt="Repiping & Reinsulation" class="w-full h-48 object-cover bg-slate-100">
-                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
-                        <div class="space-y-2">
-                            <span class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md">Aircon</span>
-                            <h3 class="font-heading text-xl text-[#0d413f]">Repiping & Reinsulation</h3>
-                            <p class="text-slate-600 text-sm leading-relaxed">Replacing worn-out copper tubing insulation and drainage lines to prevent water drops and energy loss.</p>
-                        </div>
-                        <a href="#booking" class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors">Book Now</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col">
-                    <img src="../public/assets/washing-machine.png" alt="Washing Machine Service" class="w-full h-48 object-cover bg-slate-100">
-                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
-                        <div class="space-y-2">
-                            <span class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md">Appliance</span>
-                            <h3 class="font-heading text-xl text-[#0d413f]">Washing Machine</h3>
-                            <p class="text-slate-600 text-sm leading-relaxed">Specialized maintenance, drum cleaning, motor repair, and setup for automatic washing machines.</p>
-                        </div>
-                        <a href="#booking" class="w-full bg-[#0d413f] hover:bg-[#145c58] text-center text-white font-bold py-2.5 rounded-xl text-sm transition-colors">Book Now</a>
-                    </div>
-                </div>
-
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div class="text-center max-w-3xl mx-auto space-y-3">
+          <h2 class="font-heading text-3xl sm:text-4xl text-[#0d413f]">
+            What We Offer
+          </h2>
+          <p class="text-slate-600 text-base sm:text-lg">
+            Professional care, transparent pricing, and zero shortcuts for your
+            cooling and home appliance systems.
+          </p>
         </div>
+
+        <!-- Efficiency Banner -->
+        <div
+          class="bg-[#0d413f] text-white rounded-2xl p-8 sm:p-10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 border border-[#145c58] transition-all hover:shadow-2xl"
+        >
+          <div class="space-y-2 text-center md:text-left">
+            <h3 class="font-heading text-2xl sm:text-3xl text-[#38bdf8]">
+              Is your aircon running a fever?
+            </h3>
+            <p class="text-slate-200 text-sm sm:text-base max-w-2xl">
+              Clogged cooling coils force your compressor to run double-time.
+              Routine maintenance directly drops electricity usage.
+            </p>
+          </div>
+          <a
+            href="#booking"
+            class="bg-[#38bdf8] text-[#082b2a] hover:bg-[#0284c7] font-bold px-6 py-3.5 rounded-xl whitespace-nowrap transition-all shadow-md shrink-0 hover:scale-105"
+          >
+            Save on Bills
+          </a>
+        </div>
+
+        <!-- Services Grid -->
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        >
+          <div
+            class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col"
+          >
+            <img
+              src="../src/assets/cleaning1.jpg"
+              alt="Installation"
+              class="w-full h-48 object-cover bg-slate-100"
+            />
+            <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+              <div class="space-y-2">
+                <span
+                  class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md"
+                  >Aircon</span
+                >
+                <h3 class="font-heading text-xl text-[#0d413f]">
+                  Installation
+                </h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Professional installation of window, split-type, or package
+                  air conditioning systems according to factory standards.
+                </p>
+              </div>
+              <a
+                href="#booking"
+                class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors"
+                >Book Now</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col"
+          >
+            <img
+              src="../public/assets/regular-cleaning.png"
+              alt="Regular Cleaning"
+              class="w-full h-48 object-cover bg-slate-100"
+            />
+            <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+              <div class="space-y-2">
+                <span
+                  class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md"
+                  >Aircon</span
+                >
+                <h3 class="font-heading text-xl text-[#0d413f]">
+                  Regular Cleaning
+                </h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Routine filter washing, coil inspection, and general cleaning
+                  to maintain fresh air flow and energy efficiency.
+                </p>
+              </div>
+              <a
+                href="#booking"
+                class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors"
+                >Book Now</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col"
+          >
+            <img
+              src="../public/assets/full-down-cleaning.png"
+              alt="Full Down Cleaning"
+              class="w-full h-48 object-cover bg-slate-100"
+            />
+            <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+              <div class="space-y-2">
+                <span
+                  class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md"
+                  >Aircon</span
+                >
+                <h3 class="font-heading text-xl text-[#0d413f]">
+                  Full Down Cleaning
+                </h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Complete breakdown and chemical wash of internal components
+                  for deeply clogged or heavily soiled units.
+                </p>
+              </div>
+              <a
+                href="#booking"
+                class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors"
+                >Book Now</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col"
+          >
+            <img
+              src="../public/assets/dismantling.png"
+              alt="Dismantling"
+              class="w-full h-48 object-cover bg-slate-100"
+            />
+            <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+              <div class="space-y-2">
+                <span
+                  class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md"
+                  >Aircon</span
+                >
+                <h3 class="font-heading text-xl text-[#0d413f]">Dismantling</h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Safe uninstallation and removal of old or misplaced aircon
+                  units without damaging surrounding structures.
+                </p>
+              </div>
+              <a
+                href="#booking"
+                class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors"
+                >Book Now</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col"
+          >
+            <img
+              src="../public/assets/relocation.png"
+              alt="Relocation"
+              class="w-full h-48 object-cover bg-slate-100"
+            />
+            <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+              <div class="space-y-2">
+                <span
+                  class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md"
+                  >Aircon</span
+                >
+                <h3 class="font-heading text-xl text-[#0d413f]">Relocation</h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Complete unmounting, transfer, and setup of existing units to
+                  new locations or rooms seamlessly.
+                </p>
+              </div>
+              <a
+                href="#booking"
+                class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors"
+                >Book Now</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col"
+          >
+            <img
+              src="../public/assets/troubleshooting.png"
+              alt="Troubleshooting"
+              class="w-full h-48 object-cover bg-slate-100"
+            />
+            <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+              <div class="space-y-2">
+                <span
+                  class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md"
+                  >Aircon</span
+                >
+                <h3 class="font-heading text-xl text-[#0d413f]">
+                  Troubleshooting
+                </h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Expert diagnostic checks for unusual noise, water leaks,
+                  cooling failures, or electrical irregularities.
+                </p>
+              </div>
+              <a
+                href="#booking"
+                class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors"
+                >Book Now</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col"
+          >
+            <img
+              src="../public/assets/repair.png"
+              alt="Repair"
+              class="w-full h-48 object-cover bg-slate-100"
+            />
+            <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+              <div class="space-y-2">
+                <span
+                  class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md"
+                  >Aircon</span
+                >
+                <h3 class="font-heading text-xl text-[#0d413f]">Repair</h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Targeted component replacement and restoration for failed
+                  motors, capacitors, circuit boards, or fans.
+                </p>
+              </div>
+              <a
+                href="#booking"
+                class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors"
+                >Book Now</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col"
+          >
+            <img
+              src="../public/assets/refrigerant-charging.png"
+              alt="Refrigerant Charging"
+              class="w-full h-48 object-cover bg-slate-100"
+            />
+            <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+              <div class="space-y-2">
+                <span
+                  class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md"
+                  >Aircon</span
+                >
+                <h3 class="font-heading text-xl text-[#0d413f]">
+                  Refrigerant Charging
+                </h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Freon leak checking, pressure testing, and precision gas
+                  refilling to restore optimal cooling power.
+                </p>
+              </div>
+              <a
+                href="#booking"
+                class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors"
+                >Book Now</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col"
+          >
+            <img
+              src="../public/assets/repiping.png"
+              alt="Repiping & Reinsulation"
+              class="w-full h-48 object-cover bg-slate-100"
+            />
+            <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+              <div class="space-y-2">
+                <span
+                  class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md"
+                  >Aircon</span
+                >
+                <h3 class="font-heading text-xl text-[#0d413f]">
+                  Repiping & Reinsulation
+                </h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Replacing worn-out copper tubing insulation and drainage lines
+                  to prevent water drops and energy loss.
+                </p>
+              </div>
+              <a
+                href="#booking"
+                class="w-full bg-[#0d413f] hover:bg-[#145c58] text-white font-bold py-2.5 rounded-xl text-center text-sm transition-colors"
+                >Book Now</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0d413f]/30 flex flex-col"
+          >
+            <img
+              src="../public/assets/washing-machine.jpg"
+              alt="Washing Machine Service"
+              class="w-full h-48 object-cover bg-slate-100"
+            />
+            <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+              <div class="space-y-2">
+                <span
+                  class="inline-block bg-[#e0f2fe] text-[#0d413f] font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-md"
+                  >Appliance</span
+                >
+                <h3 class="font-heading text-xl text-[#0d413f]">
+                  Washing Machine
+                </h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Specialized maintenance, drum cleaning, motor repair, and
+                  setup for automatic washing machines.
+                </p>
+              </div>
+              <a
+                href="#booking"
+                class="w-full bg-[#0d413f] hover:bg-[#145c58] text-center text-white font-bold py-2.5 rounded-xl text-sm transition-colors"
+                >Book Now</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- BOOKING SECTION -->
-    <section id="booking" class="py-20 bg-[#0d413f] border-b-8 border-[#38bdf8]">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div id="bookingCard" class="booking-card bg-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-slate-100">
-                
-                <!-- Server Error Alert Banner -->
-                <div id="bookingErrorBanner" class="hidden mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-sm font-medium"></div>
+    <section
+      id="booking"
+      class="py-20 bg-[#0d413f] border-b-8 border-[#38bdf8]"
+    >
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          id="bookingCard"
+          class="booking-card bg-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-slate-100"
+        >
+          <!-- Server Error Alert Banner -->
+          <div
+            id="bookingErrorBanner"
+            class="hidden mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-sm font-medium"
+          ></div>
 
-                <!-- 1. Booking Form Wrapper -->
-                <div id="bookingFormWrapper" class="space-y-8">
-                    <div class="text-center space-y-2">
-                        <h2 class="font-heading text-3xl sm:text-4xl text-[#0d413f]">Schedule Your Appointment</h2>
-                        <p class="text-slate-600 text-sm sm:text-base">No obligations. Fill out the quick details below and secure your slots directly in our team schedule!</p>
-                    </div>
-                    
-                    <form id="bookingForm" class="space-y-6">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label for="fullName" class="block text-xs font-bold text-[#0d413f] uppercase tracking-wider">Full Name</label>
-                                <input type="text" name="fullName" id="fullName" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] focus:ring-2 focus:ring-[#0d413f]/20 outline-none text-slate-800 text-sm transition-all" placeholder="Jane Doe" required autocomplete="name">
-                            </div>
-                            <div class="space-y-2">
-                                <label for="email" class="block text-xs font-bold text-[#0d413f] uppercase tracking-wider">Email Address</label>
-                                <input type="email" name="email" id="email" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] focus:ring-2 focus:ring-[#0d413f]/20 outline-none text-slate-800 text-sm transition-all" placeholder="jane@example.com" 
-                                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                                maxlength="38"
-                                title="Please enter a valid email address (e.g., jane@example.com)"
-                                required autocomplete="email">
-                            </div>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label for="phone" class="block text-xs font-bold text-[#0d413f] uppercase tracking-wider">Contact Number</label>
-                                <input type="tel" name="phone" id="phone" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] focus:ring-2 focus:ring-[#0d413f]/20 outline-none text-slate-800 text-sm transition-all" 
-                                  placeholder="+639123456789" pattern="^\+639\d{9}$|^09\d{9}$" minlength="11" maxlength="14" 
-                                  inputmode="tel" 
-                                  title="Please enter a valid PH contact number (e.g., +639171234567)" 
-                                  required autocomplete="tel">
-                            </div>
-
-                            <div class="space-y-2">
-                                <label for="service-type" class="block text-xs font-bold text-[#0d413f] uppercase tracking-wider">Select Service</label>
-                                <select id="service-type" name="service" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] focus:ring-2 focus:ring-[#0d413f]/20 outline-none text-slate-800 text-sm bg-white transition-all" required>
-                                    <option value="" disabled selected>Choose a service...</option>
-                                    <optgroup label="Air Conditioning Services">
-                                        <option value="installation">Installation</option>
-                                        <option value="regular-cleaning">Regular Cleaning</option>
-                                        <option value="full-down-cleaning">Full Down Cleaning</option>
-                                        <option value="dismantling">Dismantling</option>
-                                        <option value="relocation">Relocation</option>
-                                        <option value="troubleshooting">Troubleshooting</option>
-                                        <option value="repair">Repair</option>
-                                        <option value="charging-refrigerant">Charging Refrigerant</option>
-                                        <option value="repiping-reinsulation">Repiping & Reinsulation</option>
-                                    </optgroup>
-                                    <optgroup label="Appliance Services">
-                                        <option value="washing-machine">Automatic Washing Machine</option>
-                                    </optgroup>
-                                </select>        
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label for="bookingDate" class="block text-xs font-bold text-[#0d413f] uppercase tracking-wider">Preferred Schedule Date</label>
-                                <input type="date" name="bookingDate" id="bookingDate" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] focus:ring-2 focus:ring-[#0d413f]/20 outline-none text-slate-800 text-sm transition-all" required>
-                            </div>
-                            <div class="space-y-2">
-                                <label for="location" class="block text-xs font-bold text-[#0d413f] uppercase tracking-wider">Service Location</label>
-                                <input type="text" id="location" name="location" placeholder="Dasmariñas, Cavite" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] focus:ring-2 focus:ring-[#0d413f]/20 outline-none text-slate-800 text-sm transition-all" 
-                                required maxlength="45">
-                            </div>
-                        </div>
-
-                        <!-- PRIVACY CONSENT CHECKBOX -->
-                        <div class="flex items-center justify-center gap-2 my-4 text-xs text-slate-600 text-center min-h-[20px]">
-                            <input 
-                                type="checkbox" 
-                                id="dpaAgreeCheckbox" 
-                                required 
-                                style="width: 16px; height: 16px; min-width: 16px; vertical-align: middle;"
-                                class="w-4 h-4 shrink-0 rounded border-slate-300 text-[#0d413f] focus:ring-[#38bdf8] cursor-pointer accent-[#0d413f]"
-                            />
-                            <label for="dpaAgreeCheckbox" class="cursor-pointer select-none">
-                                I agree to the processing of my details for scheduling services in accordance with the 
-                                <button type="button" id="openPrivacyModal" class="text-[#0d413f] underline font-bold hover:text-[#145c58] focus:outline-none inline">
-                                    Privacy Policy
-                                </button>.
-                            </label>
-                        </div>
-            
-                        <button type="submit" class="w-full bg-[#38bdf8] hover:bg-[#0284c7] text-[#082b2a] font-bold py-4 rounded-xl text-base shadow-md transition-all hover:scale-[1.01] active:scale-[0.99]">
-                            Secure My Schedule Slot
-                        </button>
-                    </form>
-                </div>
-
-                <!-- 2. Booking Success Box (Initially Hidden) -->
-                <div id="bookingSuccess" class="hidden text-center space-y-4 py-6">
-                  <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full mb-2">
-                    <i class="fa-solid fa-calendar-check text-3xl"></i>
-                  </div>
-                  
-                  <h3 class="text-2xl font-bold text-[#0d413f]">Booking Request Received!</h3>
-                  
-                  <p class="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
-                    Thank you for choosing Koolest AC Services. We’ve received your booking details and will contact you shortly to confirm your schedule.
-                  </p>
-
-                  <div class="pt-4">
-                    <button type="button" id="resetBookingBtn" class="inline-flex items-center gap-2 bg-[#0d413f] text-white font-semibold px-6 py-3 rounded-xl text-xs hover:bg-[#145c58] transition-all">
-                      <i class="fa-solid fa-plus"></i> Book Another Service
-                    </button>
-                  </div>
-                </div>
-
+          <!-- 1. Booking Form Wrapper -->
+          <div id="bookingFormWrapper" class="space-y-8">
+            <div class="text-center space-y-2">
+              <h2 class="font-heading text-3xl sm:text-4xl text-[#0d413f]">
+                Schedule Your Appointment
+              </h2>
+              <p class="text-slate-600 text-sm sm:text-base">
+                No obligations. Fill out the quick details below and secure your
+                slots directly in our team schedule!
+              </p>
             </div>
+
+            <form id="bookingForm" class="space-y-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                  <label
+                    for="fullName"
+                    class="block text-xs font-bold text-[#0d413f] uppercase tracking-wider"
+                    >Full Name</label
+                  >
+                  <input
+                    type="text"
+                    name="fullName"
+                    id="fullName"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] focus:ring-2 focus:ring-[#0d413f]/20 outline-none text-slate-800 text-sm transition-all"
+                    placeholder="Jane Doe"
+                    required
+                    autocomplete="name"
+                  />
+                </div>
+                <div class="space-y-2">
+                  <label
+                    for="email"
+                    class="block text-xs font-bold text-[#0d413f] uppercase tracking-wider"
+                    >Email Address</label
+                  >
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] focus:ring-2 focus:ring-[#0d413f]/20 outline-none text-slate-800 text-sm transition-all"
+                    placeholder="jane@example.com"
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                    maxlength="38"
+                    title="Please enter a valid email address (e.g., jane@example.com)"
+                    required
+                    autocomplete="email"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                  <label
+                    for="phone"
+                    class="block text-xs font-bold text-[#0d413f] uppercase tracking-wider"
+                    >Contact Number</label
+                  >
+                  <input
+                    type="tel"
+                    name="phone"
+                    id="phone"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] focus:ring-2 focus:ring-[#0d413f]/20 outline-none text-slate-800 text-sm transition-all"
+                    placeholder="+639123456789"
+                    pattern="^\+639\d{9}$|^09\d{9}$"
+                    minlength="11"
+                    maxlength="14"
+                    inputmode="tel"
+                    title="Please enter a valid PH contact number (e.g., +639171234567)"
+                    required
+                    autocomplete="tel"
+                  />
+                </div>
+
+                <div class="space-y-2">
+                  <label
+                    for="service-type"
+                    class="block text-xs font-bold text-[#0d413f] uppercase tracking-wider"
+                    >Select Service</label
+                  >
+                  <select
+                    id="service-type"
+                    name="service"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] focus:ring-2 focus:ring-[#0d413f]/20 outline-none text-slate-800 text-sm bg-white transition-all"
+                    required
+                  >
+                    <option value="" disabled selected>
+                      Choose a service...
+                    </option>
+                    <optgroup label="Air Conditioning Services">
+                      <option value="installation">Installation</option>
+                      <option value="regular-cleaning">Regular Cleaning</option>
+                      <option value="full-down-cleaning">
+                        Full Down Cleaning
+                      </option>
+                      <option value="dismantling">Dismantling</option>
+                      <option value="relocation">Relocation</option>
+                      <option value="troubleshooting">Troubleshooting</option>
+                      <option value="repair">Repair</option>
+                      <option value="charging-refrigerant">
+                        Refrigerant Charging
+                      </option>
+                      <option value="repiping-reinsulation">
+                        Repiping & Reinsulation
+                      </option>
+                    </optgroup>
+                    <optgroup label="Appliance Services">
+                      <option value="washing-machine">
+                        Automatic Washing Machine
+                      </option>
+                    </optgroup>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                  <label
+                    for="bookingDate"
+                    class="block text-xs font-bold text-[#0d413f] uppercase tracking-wider"
+                    >Preferred Schedule Date</label
+                  >
+                  <input
+                    type="date"
+                    name="bookingDate"
+                    id="bookingDate"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] focus:ring-2 focus:ring-[#0d413f]/20 outline-none text-slate-800 text-sm transition-all"
+                    required
+                  />
+                </div>
+                <div class="space-y-2">
+                  <label
+                    for="location"
+                    class="block text-xs font-bold text-[#0d413f] uppercase tracking-wider"
+                    >Service Location</label
+                  >
+                  <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="Dasmariñas, Cavite"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] focus:ring-2 focus:ring-[#0d413f]/20 outline-none text-slate-800 text-sm transition-all"
+                    required
+                    maxlength="45"
+                  />
+                </div>
+              </div>
+
+              <!-- PRIVACY CONSENT CHECKBOX -->
+              <div
+                class="flex items-center justify-center gap-2 my-4 text-xs text-slate-600 text-center min-h-[20px]"
+              >
+                <input
+                  type="checkbox"
+                  id="dpaAgreeCheckbox"
+                  required
+                  style="
+                    width: 16px;
+                    height: 16px;
+                    min-width: 16px;
+                    vertical-align: middle;
+                  "
+                  class="w-4 h-4 shrink-0 rounded border-slate-300 text-[#0d413f] focus:ring-[#38bdf8] cursor-pointer accent-[#0d413f]"
+                />
+                <label
+                  for="dpaAgreeCheckbox"
+                  class="cursor-pointer select-none"
+                >
+                  I agree to the processing of my details for scheduling
+                  services in accordance with the
+                  <button
+                    type="button"
+                    id="openPrivacyModal"
+                    class="text-[#0d413f] underline font-bold hover:text-[#145c58] focus:outline-none inline"
+                  >
+                    Privacy Policy</button
+                  >.
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-[#38bdf8] hover:bg-[#0284c7] text-[#082b2a] font-bold py-4 rounded-xl text-base shadow-md transition-all hover:scale-[1.01] active:scale-[0.99]"
+              >
+                Secure My Schedule Slot
+              </button>
+            </form>
+          </div>
+
+          <!-- 2. Booking Success Box (Initially Hidden) -->
+          <div id="bookingSuccess" class="hidden text-center space-y-4 py-6">
+            <div
+              class="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full mb-2"
+            >
+              <i class="fa-solid fa-calendar-check text-3xl"></i>
+            </div>
+
+            <h3 class="text-2xl font-bold text-[#0d413f]">
+              Booking Request Received!
+            </h3>
+
+            <p class="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
+              Thank you for choosing Koolest AC Services. We’ve received your
+              booking details and will contact you shortly to confirm your
+              schedule.
+            </p>
+
+            <div class="pt-4">
+              <button
+                type="button"
+                id="resetBookingBtn"
+                class="inline-flex items-center gap-2 bg-[#0d413f] text-white font-semibold px-6 py-3 rounded-xl text-xs hover:bg-[#145c58] transition-all"
+              >
+                <i class="fa-solid fa-plus"></i> Book Another Service
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- TESTIMONIALS SECTION (INFINITE SCROLLING MARQUEE) -->
     <section id="testimonials" class="py-20 bg-slate-100 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            
-            <div class="text-center max-w-2xl mx-auto space-y-2">
-                <h2 class="font-heading text-3xl sm:text-4xl text-[#0d413f]">What Our Clients Say</h2>
-                <p class="text-slate-600">Real experiences from homeowners and businesses across Cavite and Metro Manila.</p>
-            </div>
-
-            <!-- Infinite Scrolling Wrapper -->
-            <div class="relative w-full overflow-hidden group [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-                <div class="flex w-max gap-8 animate-marquee group-hover:[animation-play-state:paused]">
-                    
-                    <!-- Card 1 -->
-                    <div class="w-[320px] sm:w-[380px] bg-white p-8 rounded-2xl border-t-4 border-[#38bdf8] border-x border-slate-200 border-b shadow-sm space-y-4 flex flex-col justify-between shrink-0 transition-transform duration-300 hover:scale-105">
-                        <div class="space-y-3">
-                            <div class="text-[#38bdf8] text-lg">★★★★★</div>
-                            <p class="text-slate-600 text-sm italic leading-relaxed">"Thanks, Koolest for cleaning my TCL 2.5 hp split type aircon. Excellent service as always! Super lamig na ng aircon namin. Until next time, God Bless!"</p>
-                        </div>
-                        <div class="flex items-center gap-2 pt-2 border-t border-slate-100 text-xs">
-                            <span class="w-2 h-2 rounded-full bg-teal-600"></span>
-                            <span class="font-bold text-[#0d413f]">Ma'am M.</span>
-                            <span class="text-slate-400">• Dasmariñas Highlands</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div class="w-[320px] sm:w-[380px] bg-white p-8 rounded-2xl border-t-4 border-[#38bdf8] border-x border-slate-200 border-b shadow-sm space-y-4 flex flex-col justify-between shrink-0 transition-transform duration-300 hover:scale-105">
-                        <div class="space-y-3">
-                            <div class="text-[#38bdf8] text-lg">★★★★★</div>
-                            <p class="text-slate-600 text-sm italic leading-relaxed">"I have been using Koolest team at regular intervals to clean my AC unit, and I am consistently satisfied with their work. Friendly and thorough!"</p>
-                        </div>
-                        <div class="flex items-center gap-2 pt-2 border-t border-slate-100 text-xs">
-                            <span class="w-2 h-2 rounded-full bg-teal-600"></span>
-                            <span class="font-bold text-[#0d413f]">Sir P.</span>
-                            <span class="text-slate-400">• Dasmariñas Highlands</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="w-[320px] sm:w-[380px] bg-white p-8 rounded-2xl border-t-4 border-[#38bdf8] border-x border-slate-200 border-b shadow-sm space-y-4 flex flex-col justify-between shrink-0 transition-transform duration-300 hover:scale-105">
-                        <div class="space-y-3">
-                            <div class="text-[#38bdf8] text-lg">★★★★★</div>
-                            <p class="text-slate-600 text-sm italic leading-relaxed">"Super professional. They brought protective sheets and left zero mess on my cream walls. Best service team in town."</p>
-                        </div>
-                        <div class="flex items-center gap-2 pt-2 border-t border-slate-100 text-xs">
-                            <span class="w-2 h-2 rounded-full bg-teal-600"></span>
-                            <span class="font-bold text-[#0d413f]">Sarah M.</span>
-                            <span class="text-slate-400">• Condo Owner</span>
-                        </div>
-                    </div>
-
-                    <!-- DUPLICATED SET FOR SEAMLESS LOOP -->
-                    <div class="w-[320px] sm:w-[380px] bg-white p-8 rounded-2xl border-t-4 border-[#38bdf8] border-x border-slate-200 border-b shadow-sm space-y-4 flex flex-col justify-between shrink-0 transition-transform duration-300 hover:scale-105" aria-hidden="true">
-                        <div class="space-y-3">
-                            <div class="text-[#38bdf8] text-lg">★★★★★</div>
-                            <p class="text-slate-600 text-sm italic leading-relaxed">"Thanks, Koolest for cleaning my TCL 2.5 hp split type aircon. Excellent service as always! Super lamig na ng aircon namin. Until next time, God Bless!"</p>
-                        </div>
-                        <div class="flex items-center gap-2 pt-2 border-t border-slate-100 text-xs">
-                            <span class="w-2 h-2 rounded-full bg-teal-600"></span>
-                            <span class="font-bold text-[#0d413f]">Ma'am M.</span>
-                            <span class="text-slate-400">• Dasmariñas Highlands</span>
-                        </div>
-                    </div>
-
-                    <div class="w-[320px] sm:w-[380px] bg-white p-8 rounded-2xl border-t-4 border-[#38bdf8] border-x border-slate-200 border-b shadow-sm space-y-4 flex flex-col justify-between shrink-0 transition-transform duration-300 hover:scale-105" aria-hidden="true">
-                        <div class="space-y-3">
-                            <div class="text-[#38bdf8] text-lg">★★★★★</div>
-                            <p class="text-slate-600 text-sm italic leading-relaxed">"I have been using Koolest team at regular intervals to clean my AC unit, and I am consistently satisfied with their work. Friendly and thorough!"</p>
-                        </div>
-                        <div class="flex items-center gap-2 pt-2 border-t border-slate-100 text-xs">
-                            <span class="w-2 h-2 rounded-full bg-teal-600"></span>
-                            <span class="font-bold text-[#0d413f]">Sir P.</span>
-                            <span class="text-slate-400">• Dasmariñas Highlands</span>
-                        </div>
-                    </div>
-
-                    <div class="w-[320px] sm:w-[380px] bg-white p-8 rounded-2xl border-t-4 border-[#38bdf8] border-x border-slate-200 border-b shadow-sm space-y-4 flex flex-col justify-between shrink-0 transition-transform duration-300 hover:scale-105" aria-hidden="true">
-                        <div class="space-y-3">
-                            <div class="text-[#38bdf8] text-lg">★★★★★</div>
-                            <p class="text-slate-600 text-sm italic leading-relaxed">"Super professional. They brought protective sheets and left zero mess on my cream walls. Best service team in town."</p>
-                        </div>
-                        <div class="flex items-center gap-2 pt-2 border-t border-slate-100 text-xs">
-                            <span class="w-2 h-2 rounded-full bg-teal-600"></span>
-                            <span class="font-bold text-[#0d413f]">Sarah M.</span>
-                            <span class="text-slate-400">• Condo Owner</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <h2 class="font-heading text-3xl sm:text-4xl text-[#0d413f]">
+            What Our Clients Say
+          </h2>
+          <p class="text-slate-600">
+            Real experiences from homeowners and businesses across Cavite and
+            Metro Manila.
+          </p>
         </div>
+
+        <!-- Infinite Scrolling Wrapper -->
+        <div
+          class="relative w-full overflow-hidden group [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
+        >
+          <div
+            class="flex w-max gap-8 animate-marquee group-hover:[animation-play-state:paused]"
+          >
+            <!-- Card 1 -->
+            <div
+              class="w-[320px] sm:w-[380px] bg-white p-8 rounded-2xl border-t-4 border-[#38bdf8] border-x border-slate-200 border-b shadow-sm space-y-4 flex flex-col justify-between shrink-0 transition-transform duration-300 hover:scale-105"
+            >
+              <div class="space-y-3">
+                <div class="text-[#38bdf8] text-lg">★★★★★</div>
+                <p class="text-slate-600 text-sm italic leading-relaxed">
+                  "Thanks, Koolest for cleaning my TCL 2.5 hp split type aircon.
+                  Excellent service as always! Super lamig na ng aircon namin.
+                  Until next time, God Bless!"
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-2 pt-2 border-t border-slate-100 text-xs"
+              >
+                <span class="w-2 h-2 rounded-full bg-teal-600"></span>
+                <span class="font-bold text-[#0d413f]">Ma'am M.</span>
+                <span class="text-slate-400">• Dasmariñas Highlands</span>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div
+              class="w-[320px] sm:w-[380px] bg-white p-8 rounded-2xl border-t-4 border-[#38bdf8] border-x border-slate-200 border-b shadow-sm space-y-4 flex flex-col justify-between shrink-0 transition-transform duration-300 hover:scale-105"
+            >
+              <div class="space-y-3">
+                <div class="text-[#38bdf8] text-lg">★★★★★</div>
+                <p class="text-slate-600 text-sm italic leading-relaxed">
+                  "I have been using Koolest team at regular intervals to clean
+                  my AC unit, and I am consistently satisfied with their work.
+                  Friendly and thorough!"
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-2 pt-2 border-t border-slate-100 text-xs"
+              >
+                <span class="w-2 h-2 rounded-full bg-teal-600"></span>
+                <span class="font-bold text-[#0d413f]">Sir P.</span>
+                <span class="text-slate-400">• Dasmariñas Highlands</span>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div
+              class="w-[320px] sm:w-[380px] bg-white p-8 rounded-2xl border-t-4 border-[#38bdf8] border-x border-slate-200 border-b shadow-sm space-y-4 flex flex-col justify-between shrink-0 transition-transform duration-300 hover:scale-105"
+            >
+              <div class="space-y-3">
+                <div class="text-[#38bdf8] text-lg">★★★★★</div>
+                <p class="text-slate-600 text-sm italic leading-relaxed">
+                  "Super professional. They brought protective sheets and left
+                  zero mess on my cream walls. Best service team in town."
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-2 pt-2 border-t border-slate-100 text-xs"
+              >
+                <span class="w-2 h-2 rounded-full bg-teal-600"></span>
+                <span class="font-bold text-[#0d413f]">Sarah M.</span>
+                <span class="text-slate-400">• Condo Owner</span>
+              </div>
+            </div>
+
+            <!-- DUPLICATED SET FOR SEAMLESS LOOP -->
+            <div
+              class="w-[320px] sm:w-[380px] bg-white p-8 rounded-2xl border-t-4 border-[#38bdf8] border-x border-slate-200 border-b shadow-sm space-y-4 flex flex-col justify-between shrink-0 transition-transform duration-300 hover:scale-105"
+              aria-hidden="true"
+            >
+              <div class="space-y-3">
+                <div class="text-[#38bdf8] text-lg">★★★★★</div>
+                <p class="text-slate-600 text-sm italic leading-relaxed">
+                  "Thanks, Koolest for cleaning my TCL 2.5 hp split type aircon.
+                  Excellent service as always! Super lamig na ng aircon namin.
+                  Until next time, God Bless!"
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-2 pt-2 border-t border-slate-100 text-xs"
+              >
+                <span class="w-2 h-2 rounded-full bg-teal-600"></span>
+                <span class="font-bold text-[#0d413f]">Ma'am M.</span>
+                <span class="text-slate-400">• Dasmariñas Highlands</span>
+              </div>
+            </div>
+
+            <div
+              class="w-[320px] sm:w-[380px] bg-white p-8 rounded-2xl border-t-4 border-[#38bdf8] border-x border-slate-200 border-b shadow-sm space-y-4 flex flex-col justify-between shrink-0 transition-transform duration-300 hover:scale-105"
+              aria-hidden="true"
+            >
+              <div class="space-y-3">
+                <div class="text-[#38bdf8] text-lg">★★★★★</div>
+                <p class="text-slate-600 text-sm italic leading-relaxed">
+                  "I have been using Koolest team at regular intervals to clean
+                  my AC unit, and I am consistently satisfied with their work.
+                  Friendly and thorough!"
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-2 pt-2 border-t border-slate-100 text-xs"
+              >
+                <span class="w-2 h-2 rounded-full bg-teal-600"></span>
+                <span class="font-bold text-[#0d413f]">Sir P.</span>
+                <span class="text-slate-400">• Dasmariñas Highlands</span>
+              </div>
+            </div>
+
+            <div
+              class="w-[320px] sm:w-[380px] bg-white p-8 rounded-2xl border-t-4 border-[#38bdf8] border-x border-slate-200 border-b shadow-sm space-y-4 flex flex-col justify-between shrink-0 transition-transform duration-300 hover:scale-105"
+              aria-hidden="true"
+            >
+              <div class="space-y-3">
+                <div class="text-[#38bdf8] text-lg">★★★★★</div>
+                <p class="text-slate-600 text-sm italic leading-relaxed">
+                  "Super professional. They brought protective sheets and left
+                  zero mess on my cream walls. Best service team in town."
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-2 pt-2 border-t border-slate-100 text-xs"
+              >
+                <span class="w-2 h-2 rounded-full bg-teal-600"></span>
+                <span class="font-bold text-[#0d413f]">Sarah M.</span>
+                <span class="text-slate-400">• Condo Owner</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- FEEDBACK SECTION -->
     <section id="rate-us" class="py-20 bg-slate-50">
-        <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-md">
-                <div id="feedbackFormWrapper" class="space-y-6">
-                    <div class="text-center space-y-2">
-                        <h2 class="font-heading text-3xl text-[#0d413f]">Share Your Koolest Experience</h2>
-                        <p class="text-slate-600 text-sm">Tell us how your fresh, clean air is feeling!</p>
-                    </div>
-
-                    <form id="feedbackForm" class="space-y-5">
-                        <div class="space-y-2">
-                            <label for="clientName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Your Name</label>
-                            <input type="text" id="clientName" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] outline-none text-sm transition-all" placeholder="e.g. Jane Doe" required />
-                        </div>
-
-                        <div class="space-y-2">
-                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Rating</label>
-                            <div class="star-rating group flex flex-row-reverse justify-end gap-2 text-2xl text-slate-300">
-                                <input type="radio" id="star5" name="rating" value="5" class="peer/5 hidden" />
-                                <label for="star5" class="cursor-pointer transition-all duration-150 hover:scale-125 peer-checked/5:text-[#38bdf8] group-hover:peer-hover/5:text-[#38bdf8] hover:text-[#38bdf8]"><i class="fa-solid fa-star"></i></label>
-
-                                <input type="radio" id="star4" name="rating" value="4" class="peer/4 hidden" />
-                                <label for="star4" class="cursor-pointer transition-all duration-150 hover:scale-125 peer-checked/4:text-[#38bdf8] peer-checked/5:text-[#38bdf8] group-hover:peer-hover/4:text-[#38bdf8] group-hover:peer-hover/5:text-[#38bdf8] hover:text-[#38bdf8]"><i class="fa-solid fa-star"></i></label>
-
-                                <input type="radio" id="star3" name="rating" value="3" class="peer/3 hidden" />
-                                <label for="star3" class="cursor-pointer transition-all duration-150 hover:scale-125 peer-checked/3:text-[#38bdf8] peer-checked/4:text-[#38bdf8] peer-checked/5:text-[#38bdf8] group-hover:peer-hover/3:text-[#38bdf8] group-hover:peer-hover/4:text-[#38bdf8] group-hover:peer-hover/5:text-[#38bdf8] hover:text-[#38bdf8]"><i class="fa-solid fa-star"></i></label>
-
-                                <input type="radio" id="star2" name="rating" value="2" class="peer/2 hidden" />
-                                <label for="star2" class="cursor-pointer transition-all duration-150 hover:scale-125 peer-checked/2:text-[#38bdf8] peer-checked/3:text-[#38bdf8] peer-checked/4:text-[#38bdf8] peer-checked/5:text-[#38bdf8] group-hover:peer-hover/2:text-[#38bdf8] group-hover:peer-hover/3:text-[#38bdf8] group-hover:peer-hover/4:text-[#38bdf8] group-hover:peer-hover/5:text-[#38bdf8] hover:text-[#38bdf8]"><i class="fa-solid fa-star"></i></label>
-
-                                <input type="radio" id="star1" name="rating" value="1" class="peer/1 hidden" />
-                                <label for="star1" class="cursor-pointer transition-all duration-150 hover:scale-125 peer-checked/1:text-[#38bdf8] peer-checked/2:text-[#38bdf8] peer-checked/3:text-[#38bdf8] peer-checked/4:text-[#38bdf8] peer-checked/5:text-[#38bdf8] group-hover:peer-hover/1:text-[#38bdf8] group-hover:peer-hover/2:text-[#38bdf8] group-hover:peer-hover/3:text-[#38bdf8] group-hover:peer-hover/4:text-[#38bdf8] group-hover:peer-hover/5:text-[#38bdf8] hover:text-[#38bdf8]"><i class="fa-solid fa-star"></i></label>
-                            </div>
-                            <span id="ratingError" class="hidden text-rose-500 text-xs"></span>
-                        </div>
-
-                        <div class="space-y-2">
-                            <label for="comment" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Your Feedback</label>
-                            <textarea id="comment" rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] outline-none text-sm resize-none transition-all" placeholder="Tell us about your experience..." required></textarea>
-                        </div>
-
-                        <button type="submit" class="w-full bg-[#38bdf8] hover:bg-[#0284c7] text-[#082b2a] font-bold py-3.5 rounded-xl text-sm transition-all shadow hover:scale-[1.01] active:scale-[0.99]">
-                            Submit Feedback
-                        </button>
-                    </form>
-                </div>
-
-                <div id="feedbackSuccess" class="hidden bg-[#0d413f] text-white p-8 rounded-2xl text-center space-y-2 animate-fade-in">
-                    <h3 class="font-heading text-xl text-[#38bdf8]">Thank you!</h3>
-                    <p class="text-slate-200 text-sm">We're thrilled to hear from you and appreciate you taking the time to share your experience.</p>
-                </div>
+      <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-md"
+        >
+          <div id="feedbackFormWrapper" class="space-y-6">
+            <div class="text-center space-y-2">
+              <h2 class="font-heading text-3xl text-[#0d413f]">
+                Share Your Koolest Experience
+              </h2>
+              <p class="text-slate-600 text-sm">
+                Tell us how your fresh, clean air is feeling!
+              </p>
             </div>
+
+            <form id="feedbackForm" class="space-y-5">
+              <div class="space-y-2">
+                <label
+                  for="clientName"
+                  class="block text-xs font-bold text-slate-700 uppercase tracking-wider"
+                  >Your Name</label
+                >
+                <input
+                  type="text"
+                  id="clientName"
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] outline-none text-sm transition-all"
+                  placeholder="e.g. Jane Doe"
+                  required
+                />
+              </div>
+
+              <div class="space-y-2">
+                <label
+                  class="block text-xs font-bold text-slate-700 uppercase tracking-wider"
+                  >Rating</label
+                >
+                <div
+                  class="star-rating group flex flex-row-reverse justify-end gap-2 text-2xl text-slate-300"
+                >
+                  <input
+                    type="radio"
+                    id="star5"
+                    name="rating"
+                    value="5"
+                    class="peer/5 hidden"
+                  />
+                  <label
+                    for="star5"
+                    class="cursor-pointer transition-all duration-150 hover:scale-125 peer-checked/5:text-[#38bdf8] group-hover:peer-hover/5:text-[#38bdf8] hover:text-[#38bdf8]"
+                    ><i class="fa-solid fa-star"></i
+                  ></label>
+
+                  <input
+                    type="radio"
+                    id="star4"
+                    name="rating"
+                    value="4"
+                    class="peer/4 hidden"
+                  />
+                  <label
+                    for="star4"
+                    class="cursor-pointer transition-all duration-150 hover:scale-125 peer-checked/4:text-[#38bdf8] peer-checked/5:text-[#38bdf8] group-hover:peer-hover/4:text-[#38bdf8] group-hover:peer-hover/5:text-[#38bdf8] hover:text-[#38bdf8]"
+                    ><i class="fa-solid fa-star"></i
+                  ></label>
+
+                  <input
+                    type="radio"
+                    id="star3"
+                    name="rating"
+                    value="3"
+                    class="peer/3 hidden"
+                  />
+                  <label
+                    for="star3"
+                    class="cursor-pointer transition-all duration-150 hover:scale-125 peer-checked/3:text-[#38bdf8] peer-checked/4:text-[#38bdf8] peer-checked/5:text-[#38bdf8] group-hover:peer-hover/3:text-[#38bdf8] group-hover:peer-hover/4:text-[#38bdf8] group-hover:peer-hover/5:text-[#38bdf8] hover:text-[#38bdf8]"
+                    ><i class="fa-solid fa-star"></i
+                  ></label>
+
+                  <input
+                    type="radio"
+                    id="star2"
+                    name="rating"
+                    value="2"
+                    class="peer/2 hidden"
+                  />
+                  <label
+                    for="star2"
+                    class="cursor-pointer transition-all duration-150 hover:scale-125 peer-checked/2:text-[#38bdf8] peer-checked/3:text-[#38bdf8] peer-checked/4:text-[#38bdf8] peer-checked/5:text-[#38bdf8] group-hover:peer-hover/2:text-[#38bdf8] group-hover:peer-hover/3:text-[#38bdf8] group-hover:peer-hover/4:text-[#38bdf8] group-hover:peer-hover/5:text-[#38bdf8] hover:text-[#38bdf8]"
+                    ><i class="fa-solid fa-star"></i
+                  ></label>
+
+                  <input
+                    type="radio"
+                    id="star1"
+                    name="rating"
+                    value="1"
+                    class="peer/1 hidden"
+                  />
+                  <label
+                    for="star1"
+                    class="cursor-pointer transition-all duration-150 hover:scale-125 peer-checked/1:text-[#38bdf8] peer-checked/2:text-[#38bdf8] peer-checked/3:text-[#38bdf8] peer-checked/4:text-[#38bdf8] peer-checked/5:text-[#38bdf8] group-hover:peer-hover/1:text-[#38bdf8] group-hover:peer-hover/2:text-[#38bdf8] group-hover:peer-hover/3:text-[#38bdf8] group-hover:peer-hover/4:text-[#38bdf8] group-hover:peer-hover/5:text-[#38bdf8] hover:text-[#38bdf8]"
+                    ><i class="fa-solid fa-star"></i
+                  ></label>
+                </div>
+                <span
+                  id="ratingError"
+                  class="hidden text-rose-500 text-xs"
+                ></span>
+              </div>
+
+              <div class="space-y-2">
+                <label
+                  for="comment"
+                  class="block text-xs font-bold text-slate-700 uppercase tracking-wider"
+                  >Your Feedback</label
+                >
+                <textarea
+                  id="comment"
+                  rows="4"
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-[#0d413f] outline-none text-sm resize-none transition-all"
+                  placeholder="Tell us about your experience..."
+                  required
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-[#38bdf8] hover:bg-[#0284c7] text-[#082b2a] font-bold py-3.5 rounded-xl text-sm transition-all shadow hover:scale-[1.01] active:scale-[0.99]"
+              >
+                Submit Feedback
+              </button>
+            </form>
+          </div>
+
+          <div
+            id="feedbackSuccess"
+            class="hidden bg-[#0d413f] text-white p-8 rounded-2xl text-center space-y-2 animate-fade-in"
+          >
+            <h3 class="font-heading text-xl text-[#38bdf8]">Thank you!</h3>
+            <p class="text-slate-200 text-sm">
+              We're thrilled to hear from you and appreciate you taking the time
+              to share your experience.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- GALLERY SECTION -->
-    <section id="gallery" class="py-20 bg-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-            <div class="text-center space-y-2">
-                <h2 class="font-heading text-3xl sm:text-4xl text-[#0d413f]">Our Team in Action</h2>
-                <p class="text-slate-600">Take a look at our team delivering quality service on the job.</p>
-            </div>
+<section id="gallery" class="py-20 bg-slate-100 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto space-y-3">
+      <h2 class="font-heading text-3xl sm:text-4xl text-[#0d413f]">
+        Our Team in Action
+      </h2>
+      <p class="text-slate-600 text-base sm:text-lg">
+        Take a look at some of our actual aircon and washing machine cleaning jobs in action.
+      </p>
+    </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                    <img src="public/assets/team-1.jpg" alt="On-site Maintenance" loading="lazy" class="w-full h-56 object-cover bg-slate-200" />
-                    <div class="p-4 text-center font-bold text-[#0d413f] text-sm">On-site Maintenance</div>
-                </div>
+    <!-- Infinite Scroll Container -->
+    <div class="relative w-full overflow-hidden mask-gradient">
+      <!-- Infinite Track -->
+      <div class="flex w-max animate-infinite-scroll gap-6 hover:[animation-play-state:paused]">
+        
+        <!-- Set 1 -->
+        <div class="flex gap-6 shrink-0">
+          <div style="width: 320px; height: 220px;" class="rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-white shrink-0 group relative">
+            <img src="../public/team/team-1.png" alt="Aircon Cleaning 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          </div>
 
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                    <img src="public/assets/team-2.jpg" alt="Quality Inspection" loading="lazy" class="w-full h-56 object-cover bg-slate-200" />
-                    <div class="p-4 text-center font-bold text-[#0d413f] text-sm">Quality Inspection</div>
-                </div>
+          <div style="width: 320px; height: 220px;" class="rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-white shrink-0 group relative">
+            <img src="../public/team/team-2.png" alt="Regular Cleaning" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          </div>
 
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                    <img src="public/assets/team-3.jpg" alt="Installation Service" loading="lazy" class="w-full h-56 object-cover bg-slate-200" />
-                    <div class="p-4 text-center font-bold text-[#0d413f] text-sm">Installation Service</div>
-                </div>
-            </div>
+          <div style="width: 320px; height: 220px;" class="rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-white shrink-0 group relative">
+            <img src="../public/team/team-3.png" alt="Full Down Cleaning" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          </div>
         </div>
-    </section>
 
+        <!-- Set 2 (Identical Duplicate) -->
+        <div class="flex gap-6 shrink-0" aria-hidden="true">
+          <div style="width: 320px; height: 220px;" class="rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-white shrink-0 group relative">
+            <img src="../public/team/team-4.jpg" alt="Aircon Cleaning 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          </div>
+
+          <div style="width: 320px; height: 220px;" class="rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-white shrink-0 group relative">
+            <img src="../public/team/team-5.png" alt="Regular Cleaning" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          </div>
+
+          <div style="width: 320px; height: 220px;" class="rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-white shrink-0 group relative">
+            <img src="../public/team/team-6.png" alt="Full Down Cleaning" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
     <!-- CONTACT SECTION -->
     <section id="contact-us" class="py-20 bg-[#0d413f] text-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-center sm:text-left">
-            <div class="space-y-2">
-                <h2 class="font-heading text-3xl sm:text-4xl text-[#38bdf8]">Get Your Cool Back</h2>
-                <p class="text-slate-200">Ready to fix your unit's performance? Reserve your slot now!</p>
-            </div>
-
-            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 text-sm sm:text-base">
-                <li class="flex items-center gap-3 justify-center sm:justify-start">
-                    <i class="fa-solid fa-phone text-[#38bdf8] text-lg w-6"></i>
-                    <span><strong>Support:</strong> <a href="tel:+639753396764" class="underline hover:text-[#38bdf8] transition-colors">+63 975 339 6764</a></span>
-                </li>
-                <li class="flex items-center gap-3 justify-center sm:justify-start">
-                    <i class="fa-solid fa-envelope text-[#38bdf8] text-lg w-6"></i>
-                    <span><strong>Email:</strong> <a href="mailto:koolest.acservices@gmail.com" class="underline hover:text-[#38bdf8] transition-colors">koolest.acservices@gmail.com</a></span>
-                </li>
-                <li class="flex items-center gap-3 justify-center sm:justify-start">
-                    <i class="fa-solid fa-location-dot text-[#38bdf8] text-lg w-6"></i>
-                    <span><strong>Location:</strong> Dasmariñas, Cavite, Philippines</span>
-                </li>
-                <li class="flex items-center gap-3 justify-center sm:justify-start">
-                    <i class="fa-solid fa-clock text-[#38bdf8] text-lg w-6"></i>
-                    <span><strong>Service Hours:</strong> Mon – Sat (8:00 AM – 5:00 PM)</span>
-                </li>
-            </ul>
+      <div
+        class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-center sm:text-left"
+      >
+        <div class="space-y-2">
+          <h2 class="font-heading text-3xl sm:text-4xl text-[#38bdf8]">
+            Get Your Cool Back
+          </h2>
+          <p class="text-slate-200">
+            Ready to fix your unit's performance? Reserve your slot now!
+          </p>
         </div>
+
+        <ul
+          class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 text-sm sm:text-base"
+        >
+          <li class="flex items-center gap-3 justify-center sm:justify-start">
+            <i class="fa-solid fa-phone text-[#38bdf8] text-lg w-6"></i>
+            <span
+              ><strong>Support:</strong>
+              <a
+                href="tel:+639753396764"
+                class="underline hover:text-[#38bdf8] transition-colors"
+                >+63 975 339 6764</a
+              ></span
+            >
+          </li>
+          <li class="flex items-center gap-3 justify-center sm:justify-start">
+            <i class="fa-solid fa-envelope text-[#38bdf8] text-lg w-6"></i>
+            <span
+              ><strong>Email:</strong>
+              <a
+                href="mailto:koolest.acservices@gmail.com"
+                class="underline hover:text-[#38bdf8] transition-colors"
+                >koolest.acservices@gmail.com</a
+              ></span
+            >
+          </li>
+          <li class="flex items-center gap-3 justify-center sm:justify-start">
+            <i class="fa-solid fa-location-dot text-[#38bdf8] text-lg w-6"></i>
+            <span
+              ><strong>Location:</strong> Dasmariñas, Cavite, Philippines</span
+            >
+          </li>
+          <li class="flex items-center gap-3 justify-center sm:justify-start">
+            <i class="fa-solid fa-clock text-[#38bdf8] text-lg w-6"></i>
+            <span
+              ><strong>Service Hours:</strong> Mon – Sat (8:00 AM – 5:00
+              PM)</span
+            >
+          </li>
+        </ul>
+      </div>
     </section>
 
     <!-- FOOTER -->
-<!-- FOOTER -->
-<footer class="bg-[#082b2a] border-t border-white/10 text-slate-400 py-8 text-center text-xs sm:text-sm">
-    <div class="max-w-7xl mx-auto px-4 space-y-2">
+    <!-- FOOTER -->
+    <footer
+      class="bg-[#082b2a] border-t border-white/10 text-slate-400 py-8 text-center text-xs sm:text-sm"
+    >
+      <div class="max-w-7xl mx-auto px-4 space-y-2">
         <p>&copy; 2026 Koolest AC Services. All rights reserved.</p>
         <div class="flex items-center justify-center gap-2 flex-wrap">
-            <a href="public/report-issue.html" class="underline hover:text-[#38bdf8] transition-colors">Report a Problem</a>
-            <span>•</span>
-            <span>For more inquiries: <a href="https://www.facebook.com/jakekabigting" target="_blank" rel="noopener noreferrer" class="underline text-slate-300 hover:text-[#38bdf8] transition-colors font-medium">Contact us on Messenger</a></span>
+          <a
+            href="public/report-issue.html"
+            class="underline hover:text-[#38bdf8] transition-colors"
+            >Report a Problem</a
+          >
+          <span>•</span>
+          <span
+            >For more inquiries:
+            <a
+              href="https://www.facebook.com/jakekabigting"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline text-slate-300 hover:text-[#38bdf8] transition-colors font-medium"
+              >Contact us on Messenger</a
+            ></span
+          >
         </div>
-    </div>
-</footer>
+      </div>
+    </footer>
 
     <!-- PRIVACY POLICY MODAL OVERLAY -->
-    <div id="privacyModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300">
-        <div class="relative w-full max-w-2xl max-h-[85vh] flex flex-col bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform transition-all">
-            
-            <!-- Header -->
-            <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-[#0d413f] text-white">
-                <div class="flex items-center gap-2.5">
-                    <div class="p-2 bg-[#38bdf8]/20 text-[#38bdf8] rounded-lg">
-                        <i class="fa-solid fa-shield-halved text-lg"></i>
-                    </div>
-                    <h3 class="text-xl font-heading tracking-wide">Privacy Policy</h3>
-                </div>
-                <button id="closePrivacyModal" type="button" class="p-1.5 text-slate-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
+    <div
+      id="privacyModal"
+      class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300"
+    >
+      <div
+        class="relative w-full max-w-2xl max-h-[85vh] flex flex-col bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform transition-all"
+      >
+        <!-- Header -->
+        <div
+          class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-[#0d413f] text-white"
+        >
+          <div class="flex items-center gap-2.5">
+            <div class="p-2 bg-[#38bdf8]/20 text-[#38bdf8] rounded-lg">
+              <i class="fa-solid fa-shield-halved text-lg"></i>
             </div>
-
-            <!-- Scrollable Body -->
-            <div class="p-6 overflow-y-auto space-y-5 text-slate-600 text-sm leading-relaxed">
-                <p class="text-xs text-slate-400 font-medium">Effective Date: August 2026</p>
-                
-                <p>Your privacy is important to us. This policy outlines how Koolest AC Services collects, uses, and protects your personal information when scheduling service appointments or submitting feedback.</p>
-
-                <div class="space-y-2">
-                    <h4 class="text-base font-bold text-[#0d413f]">1. Information We Collect</h4>
-                    <p>When booking a service or submitting feedback, we collect limited personal details:</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-600">
-                        <li><strong class="text-slate-800">Full Name</strong> (for client identification)</li>
-                        <li><strong class="text-slate-800">Contact Details</strong> (Email and Phone number for appointment confirmation and status updates)</li>
-                        <li><strong class="text-slate-800">Service Location</strong> (Address/City for technician dispatching)</li>
-                        <li><strong class="text-slate-800">Feedback & Ratings</strong> (Optional comments submitted by clients)</li>
-                    </ul>
-                </div>
-
-                <div class="space-y-2">
-                    <h4 class="text-base font-bold text-[#0d413f]">2. How We Use Your Information</h4>
-                    <p>We use the collected details strictly for essential operational purposes:</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-600">
-                        <li>Scheduling, confirming, and updating your service appointments.</li>
-                        <li>Direct contact regarding technician arrival times or service details.</li>
-                        <li>Improving overall customer service and platform reliability.</li>
-                    </ul>
-                </div>
-
-                <div class="space-y-2">
-                    <h4 class="text-base font-bold text-[#0d413f]">3. Data Protection & Sharing</h4>
-                    <p><strong class="text-slate-800">We do not sell, rent, or trade your personal information.</strong> Data is only accessed by authorized personnel to carry out requested service calls and is stored securely using cloud infrastructure.</p>
-                </div>
-
-                <div class="space-y-2">
-                    <h4 class="text-base font-bold text-[#0d413f]">4. Your Rights</h4>
-                    <p>Under the Philippine Data Privacy Act of 2012, you have the right to request access to, correction of, or removal of your personal records at any time by contacting our support team.</p>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="flex items-center justify-center px-6 py-4 border-t border-slate-100 bg-slate-50">
-                <button id="acceptPrivacyBtn" type="button" class="px-6 py-2.5 bg-[#38bdf8] hover:bg-[#0284c7] text-[#082b2a] font-bold text-sm rounded-xl shadow-sm transition-all focus:ring-2 focus:ring-[#38bdf8] focus:outline-none">
-                    I Understand
-                </button>
-            </div>
-
+            <h3 class="text-xl font-heading tracking-wide">Privacy Policy</h3>
+          </div>
+          <button
+            id="closePrivacyModal"
+            type="button"
+            class="p-1.5 text-slate-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+          >
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
         </div>
+
+        <!-- Scrollable Body -->
+        <div
+          class="p-6 overflow-y-auto space-y-5 text-slate-600 text-sm leading-relaxed"
+        >
+          <p class="text-xs text-slate-400 font-medium">
+            Effective Date: August 2026
+          </p>
+
+          <p>
+            Your privacy is important to us. This policy outlines how Koolest AC
+            Services collects, uses, and protects your personal information when
+            scheduling service appointments or submitting feedback.
+          </p>
+
+          <div class="space-y-2">
+            <h4 class="text-base font-bold text-[#0d413f]">
+              1. Information We Collect
+            </h4>
+            <p>
+              When booking a service or submitting feedback, we collect limited
+              personal details:
+            </p>
+            <ul class="list-disc pl-5 space-y-1 text-slate-600">
+              <li>
+                <strong class="text-slate-800">Full Name</strong> (for client
+                identification)
+              </li>
+              <li>
+                <strong class="text-slate-800">Contact Details</strong> (Email
+                and Phone number for appointment confirmation and status
+                updates)
+              </li>
+              <li>
+                <strong class="text-slate-800">Service Location</strong>
+                (Address/City for technician dispatching)
+              </li>
+              <li>
+                <strong class="text-slate-800">Feedback & Ratings</strong>
+                (Optional comments submitted by clients)
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2">
+            <h4 class="text-base font-bold text-[#0d413f]">
+              2. How We Use Your Information
+            </h4>
+            <p>
+              We use the collected details strictly for essential operational
+              purposes:
+            </p>
+            <ul class="list-disc pl-5 space-y-1 text-slate-600">
+              <li>
+                Scheduling, confirming, and updating your service appointments.
+              </li>
+              <li>
+                Direct contact regarding technician arrival times or service
+                details.
+              </li>
+              <li>
+                Improving overall customer service and platform reliability.
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2">
+            <h4 class="text-base font-bold text-[#0d413f]">
+              3. Data Protection & Sharing
+            </h4>
+            <p>
+              <strong class="text-slate-800"
+                >We do not sell, rent, or trade your personal
+                information.</strong
+              >
+              Data is only accessed by authorized personnel to carry out
+              requested service calls and is stored securely using cloud
+              infrastructure.
+            </p>
+          </div>
+
+          <div class="space-y-2">
+            <h4 class="text-base font-bold text-[#0d413f]">4. Your Rights</h4>
+            <p>
+              Under the Philippine Data Privacy Act of 2012, you have the right
+              to request access to, correction of, or removal of your personal
+              records at any time by contacting our support team.
+            </p>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div
+          class="flex items-center justify-center px-6 py-4 border-t border-slate-100 bg-slate-50"
+        >
+          <button
+            id="acceptPrivacyBtn"
+            type="button"
+            class="px-6 py-2.5 bg-[#38bdf8] hover:bg-[#0284c7] text-[#082b2a] font-bold text-sm rounded-xl shadow-sm transition-all focus:ring-2 focus:ring-[#38bdf8] focus:outline-none"
+          >
+            I Understand
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- BACK TO TOP BUTTON -->
-    <button id="backToTopBtn" title="Go to top" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-[#38bdf8] text-[#082b2a] rounded-full shadow-lg items-center justify-center font-bold text-lg hover:bg-[#0284c7] transition-all hidden hover:scale-110 active:scale-90">
-        <i class="fa-solid fa-arrow-up"></i>
+    <button
+      id="backToTopBtn"
+      title="Go to top"
+      class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-[#38bdf8] text-[#082b2a] rounded-full shadow-lg items-center justify-center font-bold text-lg hover:bg-[#0284c7] transition-all hidden hover:scale-110 active:scale-90"
+    >
+      <i class="fa-solid fa-arrow-up"></i>
     </button>
-</body>
+  </body>
 </html>
