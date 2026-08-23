@@ -1,5 +1,5 @@
 import { feedbackSchema } from "./validations/feedback.js";
-import { prisma } from "../src/assets/libs/prisma.js";
+import { prisma } from "./prisma.js";
 
 // Create Redis instance using Upstash REST environment variables
 const redis = new Redis({
