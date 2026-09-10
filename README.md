@@ -7,6 +7,8 @@
 [![Audience](https://img.shields.io/badge/Audience-Homeowners%20%26%20Businesses-7B2CBF?style=for-the-badge)](https://koolest.vercel.app)
 [![Platform](https://img.shields.io/badge/Type-Web%20Application-0284C7?style=for-the-badge)](https://koolest.vercel.app)
 
+The public site includes a floating Koolest Assistant chatbot. It uses the server-side `/api/chat` route, so the provider key is never exposed in the browser.
+
 **Live Site:** [koolest.vercel.app](https://koolest.vercel.app)
 ---
 
@@ -212,6 +214,12 @@ FROM_EMAIL="Koolest Aircon Services <onboarding@resend.dev>"
 # Email Testing Mode (Redirects all outbound status emails to developer during staging)
 EMAIL_TEST_MODE="true"
 TEST_RECIPIENT_EMAIL="your-test-email@example.com"
+
+# AI Assistant (OpenAI-compatible Chat Completions API)
+OPENAI_API_KEY="your-api-key"
+OPENAI_MODEL="gpt-4o-mini"
+# Optional: use another OpenAI-compatible provider endpoint
+# OPENAI_API_URL="https://api.openai.com/v1/chat/completions"
 
 ```
 

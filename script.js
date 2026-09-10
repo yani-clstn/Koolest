@@ -591,7 +591,85 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 11. Initialize Slideshow safely
   initSlideshow();
+
+  // 12. AI assistant chat widget
+  initChatWidget();
 });
+
+function initChatWidget() {
+  const chatPanel = document.getElementById("chatPanel");
+  const openChatBtn = document.getElementById("openChatBtn");
+  const closeChatBtn = document.getElementById("closeChatBtn");
+  const chatForm = document.getElementById("chatForm");
+  const chatInput = document.getElementById("chatInput");
+  const chatMessages = document.getElementById("chatMessages");
+  const chatSendBtn = document.getElementById("chatSendBtn");
+
+  if (!chatPanel || !openChatBtn || !closeChatBtn || !chatForm || !chatInput || !chatMessages || !chatSendBtn) return;
+
+  const conversation = [];
+
+  const setChatOpen = (isOpen) => {
+    chatPanel.classList.toggle("chat-panel-hidden", !isOpen);
+    chatPanel.setAttribute("aria-hidden", String(!isOpen));
+    openChatBtn.setAttribute("aria-expanded", String(isOpen));
+    if (isOpen) chatInput.focus();
+  };
+
+  const addMessage = (content, sender) => {
+    const message = document.createElement("div");
+    message.className = `chat-message max-w-[88%] rounded-2xl px-3 py-2 text-sm leading-relaxed shadow-sm ${sender === "user" ? "self-end rounded-br-sm bg-[#0d413f] text-white" : "self-start rounded-tl-sm bg-white text-slate-700"}`;
+    message.textContent = content;
+    chatMessages.appendChild(message);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  };
+
+  const setLoading = (isLoading) => {
+    chatSendBtn.disabled = isLoading;
+    chatInput.disabled = isLoading;
+    chatSendBtn.innerHTML = isLoading
+      ? '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>'
+      : '<i class="fa-solid fa-paper-plane" aria-hidden="true"></i>';
+  };
+
+  openChatBtn.addEventListener("click", () => setChatOpen(true));
+  closeChatBtn.addEventListener("click", () => setChatOpen(false));
+
+  chatForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const message = chatInput.value.trim();
+    if (!message || chatSendBtn.disabled) return;
+
+    addMessage(message, "user");
+    conversation.push({ role: "user", content: message });
+    chatInput.value = "";
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: conversation.slice(-10) }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) throw new Error(data.error || "The assistant is unavailable right now.");
+      conversation.push({ role: "assistant", content: data.reply });
+      addMessage(data.reply, "assistant");
+    } catch (error) {
+      addMessage(error.message || "Sorry, I could not respond right now. Please use the booking form or contact our team.", "assistant");
+    } finally {
+      setLoading(false);
+      chatInput.focus();
+    }
+  });
+
+  chatInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      chatForm.requestSubmit();
+    }
+  });
+}
 
 // Helper: Particle animation generator
 function initBreezeFloaterParticles() {

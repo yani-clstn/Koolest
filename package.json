@@ -15,7 +15,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@types/node": "^26.1.1",
+    "@types/node": "^26.5.1",
     "@vercel/node": "^5.8.26",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
