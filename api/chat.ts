@@ -150,7 +150,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
         temperature: 0.6, // Slight increase makes it sound less rigid/robotic
-        maxOutputTokens: 100, // Hard limit stops multi-paragraph responses.
+        maxOutputTokens: 90, // Hard limit stops multi-paragraph responses.
       },
     });
 
