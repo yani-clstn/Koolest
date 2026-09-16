@@ -613,6 +613,7 @@ function initChatWidget() {
     chatPanel.classList.toggle("chat-panel-hidden", !isOpen);
     chatPanel.setAttribute("aria-hidden", String(!isOpen));
     openChatBtn.setAttribute("aria-expanded", String(isOpen));
+    openChatBtn.classList.toggle("hidden", isOpen);
     if (isOpen) chatInput.focus();
   };
 
