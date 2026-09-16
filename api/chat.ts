@@ -14,7 +14,6 @@ interface ChatMessage {
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-// Dynamic context generator for Koolest Aircon Services
 function buildKoolestContext(): string {
   return `
     Business Overview:
@@ -89,7 +88,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ success: false, error: "Method Not Allowed. Use POST." });
   }
 
-  // Upstash Rate Limiting Integration
   if (issueRatelimit) {
     try {
       const { success } = await issueRatelimit.limit(getClientIp(req));
@@ -130,7 +128,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ success: false, error: "Please enter a message." });
     }
 
-    // Convert chat history format to Gemini contents structure
+    // Format chat history into Gemini contents structure
     const contents = rawMessages.map((msg) => ({
       role: msg.role === "assistant" ? "model" : "user",
       parts: [{ text: msg.content }],
@@ -150,8 +148,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!reply) throw new Error("Gemini API returned an empty response");
 
     return res.status(200).json({ success: true, reply });
-  } catch (error) {
-    console.error("Chat handler error:", error);
+  } catch (error: any) {
+    console.error("Chat handler error details:", error?.message || error);
     return res.status(500).json({
       success: false,
       error: "The assistant could not respond. Please try again shortly.",
