@@ -18,7 +18,7 @@ export const bookingRatelimit = new Ratelimit({
 // 2. Issue Reporting Limiter: Allow max 3 issue reports per 15 minutes per IP
 export const issueRatelimit = new Ratelimit({
   redis: redis,
-  limiter: Ratelimit.slidingWindow(3, "15 m"),
+  limiter: Ratelimit.slidingWindow(10, "1 m"), // Allows 10 requests per minute
   analytics: true,
   prefix: "@upstash/ratelimit/issues",
 });
