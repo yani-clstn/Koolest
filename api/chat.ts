@@ -1,4 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { GoogleGenAI } from "@google/genai";
+
 // @ts-ignore
 import { issueRatelimit } from "../src/assets/libs/ratelimit.js";
 
@@ -10,13 +12,15 @@ interface ChatMessage {
   content: string;
 }
 
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+
 // Dynamic context generator for Koolest Aircon Services
 function buildKoolestContext(): string {
   return `
     Business Overview:
       - Name: Koolest Aircon Cleaning & Services
-      - Location: Bacoor, Cavite (Serving Bacoor, Dasmariñas, Imus, General Trias, and nearby Cavite areas)
-      - Primary Business: Professional Air Conditioning & Appliance Maintenance
+      - Location: Dasmariñas, Cavite (Serving Bacoor, Dasmariñas, Imus, General Trias, and nearby Cavite areas)
+      - Primary Business: Air Conditioner Cleaning & Appliance Maintenance
 
     Core Services Provided:
       1. Aircon Cleaning & Maintenance (Standard wash, full-down chemical cleaning, coil inspection, anti-bacterial flushing)
@@ -27,15 +31,16 @@ function buildKoolestContext(): string {
 
     Booking & Policies:
       - Booking Method: Direct customers to fill out the "Schedule Your Appointment" form on the website.
+      - Further Contact Methods: Customers can reach out via messenger user Joseph Kabigting.
       - Operating Hours: Monday to Sunday, 8:00 AM - 6:00 PM.
-      - Payment Methods: Cash on Delivery or GCash / Digital Bank Transfer upon service completion.
+      - Payment Methods: Cash or GCash / Digital Bank Transfer upon service completion.
   `;
 }
 
 const SYSTEM_INSTRUCTION = `
 # [ROLE]
 
-You are "Koolest Assistant", the friendly, professional virtual assistant for Koolest Aircon Cleaning & Services in Cavite, Philippines.
+You are "Koolest Assistant", the friendly, professional virtual assistant for Koolest Aircon Cleaning & Services in Dasmariñas Cavite, Philippines and nearby Cavite areas.
 
 You speak on behalf of Koolest. Use inclusive team language ("we", "our", "us", "Koolest") and keep your responses helpful, polite, concise, and reassuring.
 
@@ -48,9 +53,9 @@ ${buildKoolestContext()}
 # [RULES & BEHAVIOR]
 
 1. Represent Koolest Professionally:
-   - Always speak as the business ("We offer...", "Our technicians can...").
+   - Always speak as the business ("We offer...", "Our team can...").
    - You may answer in English or simple Tagalog/Filipino if the customer speaks in Tagalog.
-   - Do not claim to be a human technician in the field if asked directly; explain that you are Koolest's virtual assistant.
+   - Do not claim to be a human technician or website administrator in the field if asked directly; explain that you are Koolest's virtual assistant.
 
 2. Service & Pricing Policy:
    - Do not invent exact prices, schedules, technician availability, instant guarantees, or unauthorized policies.
@@ -99,7 +104,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
   }
 
-  if (!process.env.OPENAI_API_KEY) {
+  if (!process.env.GEMINI_API_KEY) {
     return res.status(503).json({
       success: false,
       error: "The assistant is being configured. Please use the booking form or contact our team.",
@@ -110,7 +115,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     let body = req.body;
     if (typeof body === "string") body = JSON.parse(body);
 
-    const messages: ChatMessage[] = Array.isArray(body?.messages)
+    const rawMessages: ChatMessage[] = Array.isArray(body?.messages)
       ? body.messages
           .filter((message: any) => message?.role === "user" || message?.role === "assistant")
           .slice(-MAX_MESSAGES)
@@ -121,38 +126,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           .filter((message: ChatMessage) => message.content)
       : [];
 
-    if (!messages.length || messages[messages.length - 1].role !== "user") {
+    if (!rawMessages.length || rawMessages[rawMessages.length - 1].role !== "user") {
       return res.status(400).json({ success: false, error: "Please enter a message." });
     }
 
-    const upstreamResponse = await fetch(
-      process.env.OPENAI_API_URL || "https://api.openai.com/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: process.env.OPENAI_MODEL || "gpt-4o-mini",
-          messages: [{ role: "system", content: SYSTEM_INSTRUCTION }, ...messages],
-          temperature: 0.3,
-          max_tokens: 300,
-        }),
-      }
-    );
+    // Convert chat history format to Gemini contents structure
+    const contents = rawMessages.map((msg) => ({
+      role: msg.role === "assistant" ? "model" : "user",
+      parts: [{ text: msg.content }],
+    }));
 
-    const data = await upstreamResponse.json();
-    if (!upstreamResponse.ok) {
-      console.error("AI provider error:", data?.error?.message || upstreamResponse.status);
-      return res.status(502).json({
-        success: false,
-        error: "The assistant is temporarily unavailable. Please try again shortly.",
-      });
-    }
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: contents,
+      config: {
+        systemInstruction: SYSTEM_INSTRUCTION,
+        temperature: 0.3,
+        maxOutputTokens: 300,
+      },
+    });
 
-    const reply = data?.choices?.[0]?.message?.content?.trim();
-    if (!reply) throw new Error("AI provider returned an empty response");
+    const reply = response.text?.trim();
+    if (!reply) throw new Error("Gemini API returned an empty response");
 
     return res.status(200).json({ success: true, reply });
   } catch (error) {
