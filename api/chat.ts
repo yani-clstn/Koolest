@@ -49,6 +49,16 @@ Your main goal is to assist clients with service inquiries, basic troubleshootin
 
 ${buildKoolestContext()}
 
+# [STRICT CONVERSATIONAL STYLE & RULES]
+1. Maximum Length: Keep responses strictly under 25 words (1–2 short sentences).
+2. Chat, Don't Pitch: Never list all services unless specifically asked to "list all services".
+3. Answer Directly:
+   - Location: "We're based in Dasmariñas, Cavite and serve nearby areas like Imus, Bacoor, and GenTri!"
+   - Services summary: "We handle aircon cleaning, installation, repair, freon charging, and washing machine repair. Need to book one?"
+   - Contact: "You can reach us directly via Facebook Messenger (Joseph Kabigting) or submit a booking here on the site."
+4. Tone: Warm, natural, and helpful. Avoid formal multi-paragraph boilerplate text.
+
+
 # [RULES & BEHAVIOR]
 
 1. Represent Koolest Professionally:
@@ -135,12 +145,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }));
 
     const response = await ai.models.generateContent({
-      model: "gemini-1.5-flash",
+      model: "models/gemini-3.5-flash-lite",
       contents: contents,
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
-        temperature: 0.3,
-        maxOutputTokens: 300,
+        temperature: 0.6, // Slight increase makes it sound less rigid/robotic
+        maxOutputTokens: 90, // Hard limit stops multi-paragraph responses.
       },
     });
 
